@@ -1,0 +1,63 @@
+﻿@model IEnumerable<HomeAccountingWithAspNet.Models.Expense>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Список расходов</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Create" class="btn btn-primary">Добавить </a>
+            <a asp-action="ExpenseReport" class="btn btn-primary">Отчеты </a>
+            <a asp-controller="ExpenseCategory" asp-action="Index" class="btn btn-primary">Список категории </a>
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Категория
+                    </th>
+                    <th>
+                        Дата добавления
+                    </th>
+                    <th>
+                        Сумма
+                    </th>
+                    <th>
+                        Комментарий
+                    </th>
+                    <th>
+                        Действии
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var expense in Model)
+                {
+                    <tr>
+                        <td width="15%">@expense.Category.Name</td>
+                        <td width="15%">@expense.dateTime.ToShortDateString()</td>
+                        <td width="15%">@expense.Amount.ToString("N2")</td>
+                        <td width="30%">@expense.Comment</td>
+                        <td width="25%">
+                            <div class="w-100 btn-group" role="group">
+                                <a asp-action="Update" asp-route-Id="@expense.Id" class="btn btn-primary mx-1">Изменить</a>
+                                <a asp-action="Delete" asp-route-Id="@expense.Id" class="btn btn-danger mx-1">Удалить</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p></p>
+    }
+
+</div>

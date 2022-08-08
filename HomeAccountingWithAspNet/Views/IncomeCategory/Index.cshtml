@@ -1,0 +1,46 @@
+﻿@model IEnumerable<HomeAccountingWithAspNet.Models.IncomeCategory>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Список категории доходов</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Create" class="btn btn-primary">Добавить категорию</a>
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Название
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td width="35%">@category.Name</td>
+                        <td width="30%">
+                            <div class="w-100 btn-group" role="group">
+                                <a asp-action="Update" asp-route-Id="@category.Id" class="btn btn-primary mx-1">Изменить</a>
+                                <a asp-action="Delete" asp-route-Id="@category.Id" class="btn btn-danger mx-1">Удалить</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p></p>
+    }
+
+</div>

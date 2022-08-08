@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+
+<div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            $.ajax({
+                type: "POST",
+                url: "/Home/Privacy/",
+
+                contentType: "application/json; charset=utf-8",
+                cache: false,
+                traditional: true,
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    var options = {
+                        title: 'Диаграмма расходов за текущий месяц'
+                    };
+                    var chart = new google.visualization.ColumnChart($("#chart")[0]);
+
+                    chart.draw(data, options);
+                    chart1.draw(data, options);
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+    </script>
+    <div id="chart" style="width: 1000px; height: 800px;">
+    </div>
+</div>

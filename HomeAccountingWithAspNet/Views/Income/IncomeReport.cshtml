@@ -1,0 +1,85 @@
+﻿<div class="row pt-2">
+    <div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            google.load("visualization", "1", { packages: ["corechart"] });
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                $.ajax({
+                    type: "POST",
+                    url: "/Income/GetWeeklyIncome/",
+
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    traditional: true,
+                    dataType: "json",
+                    success: function (r) {
+                        var data = google.visualization.arrayToDataTable(r);
+                        //Pie
+                        var options = {
+                            title: 'Диаграмма доходов за текущую неделю'
+                        };
+                        var chart = new google.visualization.PieChart($("#chart")[0]);
+                        //var chart1 = new google.visualization.ColumnChart($("#chart1")[0]);
+                        chart.draw(data, options);
+                        //chart1.draw(data, options);
+                    },
+                    failure: function (r) {
+                        alert(r.d);
+                    },
+                    error: function (r) {
+                        alert(r.d);
+                    }
+                });
+            }
+        </script>
+        <div id="chart" style="width: 500px; height: 400px;">
+        </div>
+        <div id="chart1" style="width: 500px; height: 400px;">
+        </div>
+    </div>
+
+    <div class="text-right">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            google.load("visualization", "1", { packages: ["corechart"] });
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                $.ajax({
+                    type: "POST",
+                    url: "/Income/GetMonthlyIncome/",
+
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    traditional: true,
+                    dataType: "json",
+                    success: function (r) {
+                        var data = google.visualization.arrayToDataTable(r);
+                        //Pie
+                        var options = {
+                            title: 'Диаграмма доходов за текущий месяц'
+                        };
+                        var chart = new google.visualization.PieChart($("#chart2")[0]);
+                        //var chart1 = new google.visualization.ColumnChart($("#chart3")[0]);
+                        chart.draw(data, options);
+                        //chart1.draw(data, options);
+                    },
+                    failure: function (r) {
+                        alert(r.d);
+                    },
+                    error: function (r) {
+                        alert(r.d);
+                    }
+                });
+            }
+        </script>
+        <div id="chart2" style="width: 500px; height: 400px;">
+        </div>
+        <div id="chart3" style="width: 500px; height: 400px; margin-left: 40%">
+        </div>
+    </div>
+</div>

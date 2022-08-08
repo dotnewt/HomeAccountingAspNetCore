@@ -1,0 +1,48 @@
+﻿@model HomeAccountingWithAspNet.Models.ViewModels.IncomeMV
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Изменить</h1>
+
+<h4>Доход</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Income.Id" />
+            <div class="form-group">
+                <label asp-for="Income.Category" class="control-label"></label>
+                <select asp-for="Income.IncomeTypeId" asp-items="@Model.TypeDropDown" class="form-control">
+                    <option selected>--Select Expense type --</option>
+                </select>
+                <span asp-validation-for="Income.IncomeTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Income.dateTime" class="control-label"></label>
+                <input asp-for="Income.dateTime" class="form-control" />
+                <span asp-validation-for="Income.dateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Income.Amount" class="control-label"></label>
+                <input asp-for="Income.Amount" class="form-control"/>
+                <span asp-validation-for="Income.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Income.Comment" class="control-label"></label>
+                <input asp-for="Income.Comment" class="form-control" />
+                <span asp-validation-for="Income.Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Изменить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Назад</a>
+</div>
+
